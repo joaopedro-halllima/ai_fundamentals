@@ -1,4 +1,4 @@
-# Neural Network from Scratch — MNIST Classifier
+# Neural Network from Scratch: MNIST Classifier
 
 A multi-layer perceptron (MLP) built and trained from scratch in PyTorch to classify handwritten digits (MNIST), as part of building foundational deep learning intuition from first principles.
 
