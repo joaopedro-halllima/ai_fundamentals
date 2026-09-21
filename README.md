@@ -14,7 +14,7 @@ Built as part of a self-directed deep dive into AI/ML fundamentals including und
 
 ## Results
 - Test accuracy: 96.9%
-- See `wrong_predictions.png` for example misclassifications — many are genuinely ambiguous even to a human eye (e.g. a "5" with a closed loop resembling a "6")
+- See `wrong_predictions.png` for example misclassifications. Many are genuinely ambiguous even to a human eye (e.g. a "5" with a closed loop resembling a "6")
 
 ## Stack
 Python, PyTorch, torchvision, matplotlib
