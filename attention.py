@@ -85,4 +85,36 @@ print("Weights shape:", mh_weights.shape)
 print("\nHead 1's attention weights for word 1:")
 print(mh_weights[0, 0, 0])
 print("\nHead 2's attention weights for word 1:")
-print(mh_weights[0, 1, 0]) # MULTI-HEAD PRINTS       
+print(mh_weights[0, 1, 0]) # MULTI-HEAD PRINTS
+
+class TransformerBlock(nn.Module):
+    def __init__(self, embed_dim, num_heads, ff_dim):
+        super().__init__()
+        self.attn = MultiHeadAttention(embed_dim, num_heads)
+        self.norm1 = nn.LayerNorm(embed_dim) # It normalizes after attention for training (layer normalization in paper)
+        self.norm2 = nn.LayerNorm(embed_dim) # It normalizes after the feed-network step
+
+        self.ff = nn.Sequential( # The feed-forward network
+            nn.Linear(embed_dim, ff_dim), # Expand
+            nn.ReLU(), # Adds the non-linear aspect, from paper
+            nn.Linear(ff_dim, embed_dim) # Compress it back down to embed_dim
+        )
+
+    def forward(self, x):
+        attn_output, _ = self.attn(x) # The multi-head attention run on x
+        x = self.norm1(x + attn_output) 
+
+        ff_output = self.ff(x) # Now feed-forward network on the attention output
+        x = self.norm2(x + ff_output) 
+
+        return x
+
+print("\n---Transformer Block---")
+
+ff_dim = 32
+
+block = TransformerBlock(embed_dim, num_heads, ff_dim)
+block_output = block(x)
+
+print("Input shape:", x.shape) # Shape tells you the dimensions, its a pytorch tensor
+print("Output shape:", block_output.shape)
