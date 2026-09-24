@@ -42,7 +42,7 @@ print("\nAttention weights for word 1:")
 print(weights[0, 0]) # First sentence, first row of weights, SINGLE HEAD PRINTS
 
 class MultiHeadAttention(nn.Module):
-    def __init__(self, emed_dim, num_heads):
+    def __init__(self, embed_dim, num_heads):
         super().__init__()
         self.num_heads = num_heads
         self.head_dim = embed_dim // num_heads
